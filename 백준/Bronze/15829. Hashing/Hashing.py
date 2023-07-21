@@ -13,7 +13,7 @@ H = 0
 for i in range(L):
     n = alpabet.index(string[i]) + 1
     r = (31 ** i) % M
-    H += n * r
+    H += (n * r) % M
 
 hash_table[string] = H % M
 
