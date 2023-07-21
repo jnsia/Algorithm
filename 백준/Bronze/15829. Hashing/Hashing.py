@@ -2,7 +2,7 @@
 L = int(input())
 string = input()
 
-r = 31
+r = 0
 M = 123456891
 
 alpabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -12,7 +12,8 @@ H = 0
 
 for i in range(L):
     n = alpabet.index(string[i]) + 1
-    H += (n) * (31 ** i)
+    r = (31 ** i) % M
+    H += n * r
 
 hash_table[string] = H % M
 
