@@ -14,6 +14,6 @@ for i in range(L):
     n = alpabet.index(string[i]) + 1
     H += (n) * (31 ** i)
 
-hash_table[string] = H
+hash_table[string] = H % M
 
 print(hash_table[string])
