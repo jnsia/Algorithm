@@ -13,7 +13,7 @@ for i in range(1, N + 1):
 for j in range(M):
     question = sys.stdin.readline().rstrip()
     
-    if question.isdigit():
+    if question.isdecimal():
         print(pocketmon[question])
     else:
         print(pocketmon2[question])
