@@ -1,11 +1,7 @@
-def f(n):
-    res = 1
-    for i in range(1, n + 1):
-        res *= i
-    return res
+import math
 
 def c(a, b):
-    return f(a) // (f(b) * f(a - b))
+    return math.factorial(a) // (math.factorial(b) * math.factorial(a - b))
 
 import sys
 input = sys.stdin.readline
