@@ -5,10 +5,7 @@ N = int(input())
 M = int(input())
 S = input()
 
-P = 'I'
-
-for i in range(N):
-    P = 'IO' + P
+P = 'IO' * N + 'I'
 
 cnt = 0
 
