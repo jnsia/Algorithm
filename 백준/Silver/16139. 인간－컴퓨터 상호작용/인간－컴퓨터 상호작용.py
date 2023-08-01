@@ -9,5 +9,13 @@ for _ in range(q):
     l = int(l)
     r = int(r)
 
-    res = S[l:r+1].count(a)
+    dit = dict()
+
+    dit.setdefault(a, 0)
+
+    for k in range(l, r + 1):
+        dit.setdefault(S[k], 0)
+        dit[S[k]] += 1
+
+    res = dit[a]
     print(res)
