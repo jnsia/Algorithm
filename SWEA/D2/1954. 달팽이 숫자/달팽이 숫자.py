@@ -1,47 +1,56 @@
 T = int(input())
 
-for t in range(1, T + 1):
-    print(f'#{t}')
+for tc in range(1, T + 1):
+    print(f'#{tc}')
     N = int(input())
 
-    numbers = [num for num in range(1, N * N + 1)]
+    visited = set()
+    visited.add((0, 0))
+    route = [(0, 0)]
 
-    block = [-1 for i in range(N + 2)]
-    block_map = [block[:] for j in range(N + 2)]
-
-    for x in range(1, N + 1):
-        for y in range(1, N + 1):
-            block_map[x][y] = 0
-
-    a = 1
-    b = 1
+    x = 0
+    y = 0
 
     while True:
-        while block_map[a][b + 1] == 0:
-            block_map[a][b] = numbers[0]
-            b += 1
-            del numbers[0]
+        while True:
+            if 0 <= y + 1 < N and (x, y + 1) not in visited:
+                y += 1
+                route.append((x,y))
+                visited.add((x,y))
+            else:
+                break
 
-        while block_map[a + 1][b] == 0:
-            block_map[a][b] = numbers[0]
-            a += 1
-            del numbers[0]
+        while True:
+            if 0 <= x + 1 < N and (x + 1, y) not in visited:
+                x += 1
+                route.append((x,y))
+                visited.add((x,y))
+            else:
+                break
 
-        while block_map[a][b - 1] == 0:
-            block_map[a][b] = numbers[0]
-            b -= 1
-            del numbers[0]
-        
-        while block_map[a - 1][b] == 0:
-            block_map[a][b] = numbers[0]
-            a -= 1
-            del numbers[0]
+        while True:
+            if 0 <= y - 1 < N and (x, y - 1) not in visited:
+                y -= 1
+                route.append((x,y))
+                visited.add((x,y))
+            else:
+                break
 
-        if len(numbers) == 1:
-            block_map[a][b] = numbers[0]
+        while True:
+            if 0 <= x - 1 < N and (x - 1, y) not in visited:
+                x -= 1
+                route.append((x,y))
+                visited.add((x,y))
+            else:
+                break
+
+        if len(route) == N * N:
             break
 
-    for c in range(1, N + 1):
-        for d in range(1, N + 1):
-            print(block_map[c][d], end=' ')
-        print()
+    NxN_map = [[0 for _ in range(N)] for _ in range(N)]
+
+    for i in range(N * N):
+        NxN_map[route[i][0]][route[i][1]] = i + 1
+
+    for map in NxN_map:
+        print(*map)
