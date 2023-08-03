@@ -1,6 +1,6 @@
 T = int(input())
 
-for test_case in range(1, T + 1):
+for tc in range(1, T + 1):
     N = int(input())
 
     result = [0] * 5
@@ -22,7 +22,7 @@ for test_case in range(1, T + 1):
             result[4] += 1
             N = N // 11
     
-    print(f'#{test_case}', end=" ")
+    print(f'#{tc}', end=" ")
 
     for i in result:
         print(i, end=" ")
