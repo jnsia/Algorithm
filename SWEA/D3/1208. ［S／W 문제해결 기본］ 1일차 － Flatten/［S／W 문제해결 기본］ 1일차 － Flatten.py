@@ -1,31 +1,39 @@
-def bubble(arr):
-    arr_len = 0
+def quick_sort(arr):
+    new_arr = arr[:]
 
-    for _ in arr:
-        arr_len += 1
+    if not new_arr:
+        return []
 
-    for x in range(arr_len):
-        for y in range(arr_len - 1):
-            if arr[y] > arr[y + 1]:
-                arr[y], arr[y + 1] = arr[y + 1], arr[y]
+    pivot = new_arr[0]
+    tail = new_arr[1:]
 
-    return arr
+    left = list()
+    right = list()
+
+    for i in tail:
+        if pivot > i:
+            left.append(i)
+        else:
+            right.append(i)
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
 
 T = 10
 
 for tc in range(1, T + 1):
+    print(f'#{tc}', end=" ")
     N = int(input())
-    lst = list(map(int, input().split()))
+    boxes = list(map(int, input().split()))
 
     for i in range(N):
-        lst = bubble(lst)
-        
-        if lst[-1] == lst[0]:
-            break
-        
-        lst[-1] -= 1
-        lst[0] += 1
-    
-    lst = bubble(lst)
+        boxes = quick_sort(boxes)
 
-    print(f'#{tc}', lst[-1] - lst[0])
+        if boxes[-1] - boxes[0] <= 1:
+            break
+
+        boxes[-1] -= 1
+        boxes[0] += 1
+
+    boxes = quick_sort(boxes)
+    res = boxes[-1] - boxes[0]
+    print(res)
