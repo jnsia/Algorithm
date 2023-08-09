@@ -1,28 +1,18 @@
-import sys
-
 N = int(input())
 
-five = [i for i in range(0, N + 1, 5)]
-three = [j for j in range(0, N + 1, 3)]
+cnt = 0
 
-arr = []
+while N > 5:
+    if N % 5 != 0:
+        N -= 3
+        cnt += 1
+    else:
+        N -= 5
+        cnt += 1
 
-for x in five:
-    for y in three:
-        if x + y == N:
-            arr.append((x / 5) + (y / 3))
-
-for xx in five:
-    for xxx in five:
-        if xx + xxx == N:
-            arr.append((xx / 5) + (xxx / 5))
-
-for yy in three:
-    for yyy in three:
-        if yy + yyy == N:
-            arr.append((yy / 3) + (yyy / 3))
-
-if len(arr) == 0:
-    print(-1)
+if N == 5 or N == 3:
+    cnt += 1
 else:
-    print(int(sorted(arr)[0]))
+    cnt = -1
+
+print(cnt)
