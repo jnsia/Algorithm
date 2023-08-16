@@ -1,33 +1,14 @@
-# T = int(input())
+T = 10
 
-for t in range(1, 11):
+for tc in range(1, T + 1):
+    print(f'#{tc}', end=" ")
     N = int(input())
-    st = input()
-    print(f'#{t}', end=" ")
+    text = input()
 
-    stack = []
-    post = ''
+    SUM = 0
 
-    for i in st:
-        if len(stack) == 0 and i == '+':
-            stack.append(i)
-        elif len(stack) != 0 and i == '+':
-            post += i
-        else:
-            post += i
+    for word in text:
+        if word != '+':
+            SUM += int(word)
 
-    for i in stack:
-        post += i
-        stack.remove(i)
-
-    # print(post)
-
-    result = 0
-
-    for x in post:
-        if x == '+':
-            pass
-        else:
-            stack.append(int(x))
-
-    print(sum(stack))
+    print(SUM)
