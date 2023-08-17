@@ -1,46 +1,47 @@
-# T = int(input())
+T = 10
 
-for t in range(1, 11):
+for tc in range(1, T + 1):
+    print(f'#{tc}', end=" ")
     N = int(input())
-    st = input()
-    print(f'#{t}', end=" ")
+    in_fix = list(input())
 
-    stack = []
-    post = ''
+    in_stack = []
+    post_fix = []
 
-    for i in st:
-        if i == '+' or i == '*':
-            if len(stack) == 0:
-                stack.append(i)
-            elif stack[-1] == '+' and i == '*':
-                stack.append(i)
-            elif stack[-1] == i:
-                post += i
-            elif stack[-1] == '*' and i == '+':
-                post += '*'
-                del stack[-1]
-                stack.append(i)
-        else:
-            post += i
+    for word in in_fix:
+        if word.isdigit():
+            post_fix.append(int(word))
 
-    for i in range(len(stack)):
-        post += stack[-1]
-        del stack[-1]
+        if word == '+':
+            while len(in_stack) > 0 and in_stack[-1] in ['+', '*']:
+                tmp = in_stack.pop()
+                post_fix.append(tmp)
 
-    # print(post)
+            in_stack.append(word)
 
-    for x in post:
-        if x == '*':
-            temp = int(stack[-1]) * int(stack[-2])
-            del stack[-1]
-            del stack[-1]
-            stack.append(temp)
-        elif x == '+':
-            temp = int(stack[-1]) + int(stack[-2])
-            del stack[-1]
-            del stack[-1]
-            stack.append(temp)
-        else:
-            stack.append(int(x))
+        if word == '*':
+            if len(in_stack) > 0 and in_stack[-1] == '*':
+                tmp = in_stack.pop()
+                post_fix.append(tmp)
 
-    print(stack[0])
+            in_stack.append(word)
+
+    while len(in_stack) > 0:
+        tmp = in_stack.pop()
+        post_fix.append(tmp)
+
+    post_stack = []
+
+    for word in post_fix:
+        if word not in ['+', '*']:
+            post_stack.append(word)
+
+        if word == '+':
+            tmp = post_stack.pop()
+            post_stack[-1] = post_stack[-1] + tmp
+
+        if word == '*':
+            tmp = post_stack.pop()
+            post_stack[-1] = post_stack[-1] * tmp
+
+    print(post_stack[0])
