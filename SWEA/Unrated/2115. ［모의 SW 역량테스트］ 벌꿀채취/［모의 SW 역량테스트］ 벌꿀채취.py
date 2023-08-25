@@ -1,32 +1,45 @@
-def pick_bucket(bucket, target, visit):
-    global mx_honey
+def pick_bucket1(bucket, target1, visit):
+    global mx_honey1
 
-    new_visit = visit[:]
+    new_visit1 = visit[:]
 
-    if sum(target) > C:
+    if sum(target1) > C:
         return
 
     tmp_total = 0
 
-    for lc in target:
+    for lc in target1:
         tmp_total += lc * lc
 
-    if tmp_total > mx_honey:
-        mx_honey = tmp_total
+    if tmp_total > mx_honey1:
+        mx_honey1 = tmp_total
 
     for bc in range(M):
-        if new_visit[bc] == False:
-            new_visit[bc] = True
-            pick_bucket(bucket, target + [bucket[bc]], new_visit)
+        if new_visit1[bc] == False:
+            new_visit1[bc] = True
+            pick_bucket1(bucket, target1 + [bucket[bc]], new_visit1)
 
 
-def get_honey(arr):
-    honey_bucket = []
+def pick_bucket2(bucket, target2, visit):
+    global mx_honey2
 
-    for ax, ay in arr:
-        honey_bucket.append(honey[ax][ay])
+    new_visit2 = visit[:]
 
-    return honey_bucket
+    if sum(target2) > C:
+        return
+
+    tmp_total = 0
+
+    for lc in target2:
+        tmp_total += lc * lc
+
+    if tmp_total > mx_honey2:
+        mx_honey2 = tmp_total
+
+    for bc in range(M):
+        if new_visit2[bc] == False:
+            new_visit2[bc] = True
+            pick_bucket2(bucket, target2 + [bucket[bc]], new_visit2)
 
 
 def is_dup(arr1, arr2):
@@ -58,11 +71,14 @@ for tc in range(1, T + 1):
 
             coord.append(case)
 
-    res_list = []
+    answer = 0
 
     for worker1 in range(len(coord)):
+        
         for worker2 in range(worker1, len(coord)):
             if not worker1 == worker2 and not is_dup(coord[worker1], coord[worker2]):
+                total_honey = 0
+                
                 honey1 = []
                 honey2 = []
 
@@ -72,22 +88,17 @@ for tc in range(1, T + 1):
                 for bx, by in coord[worker2]:
                     honey2.append(honey[bx][by])
 
-                res_list.append([honey1, honey2])
+                mx_honey1 = 0
+                mx_honey2 = 0
+                visited1 = [False for _ in range(M)]
+                visited2 = [False for _ in range(M)]
+                pick_bucket1(honey1, [], visited1)
+                pick_bucket2(honey2, [], visited2)
 
-    answer = 0
+                total_honey = mx_honey1 + mx_honey2
 
-    for res in res_list:
-        total_honey = 0
-        for work in range(2):
-            mx_honey = 0
-
-            visited = [False for _ in range(M)]
-            pick_bucket(res[work], [], visited)
-
-            total_honey += mx_honey
-
-        if total_honey > answer:
-            answer = total_honey
+                if total_honey > answer:
+                    answer = total_honey
 
     print(answer)
 
