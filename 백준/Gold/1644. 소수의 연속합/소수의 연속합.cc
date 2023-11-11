@@ -12,17 +12,10 @@ int main(void) {
 
 	for (int i = 2; i <= N; i++)
 	{
-		if (is_primes[i] == 1) continue;
-
-		for (int j = 2; j <= 2000; j++)
-		{
-			if (i % j == 0) {
-				for (int k = i + i; k <= N; k += i)
-				{
-					is_primes[k] = 1;
-				}
-
-				break;
+		if (is_primes[i] == 0) {
+			for (int k = i + i; k <= N; k += i)
+			{
+				is_primes[k] = 1;
 			}
 		}
 	}
