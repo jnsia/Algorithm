@@ -3,7 +3,7 @@ using namespace std;
 
 int L;
 char str[51];
-const int R = 31;
+const long long int R = 31;
 const int M = 1234567891;
 
 long long int power(int times) {
@@ -15,11 +15,13 @@ long long int power(int times) {
         return R;
     }
 
+    long long int temp = power(times / 2) % M;
+
     if (times % 2 == 0) {
-        return (power(times / 2) * power(times / 2)) % M;
+        return (temp * temp) % M;
     }
     else {
-        return ((power(times / 2) * power(times / 2)) % M * R) % M;
+        return ((temp * temp) % M * R) % M;
     }
 }
 
@@ -39,7 +41,7 @@ int main()
         answer += ((int(str[i]) - int('a') + 1) * power(i)) % M;
     }
     
-    cout << answer;
+    cout << answer % M;
 
     return 0;
 }
