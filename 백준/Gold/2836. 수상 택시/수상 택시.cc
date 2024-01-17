@@ -80,7 +80,7 @@ int main() {
 
     long long int answer = M;
     
-    Node* now = new Node(1000000001, 1000000001);
+    Node* now = new Node(M + 1, M + 1);
 
     for (int i = 0; i < size; i++) {
         if (now->end > arr[i]->start) {
