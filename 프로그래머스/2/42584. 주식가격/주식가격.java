@@ -17,9 +17,9 @@ class Solution {
         
         stack.add(new Data(0, prices[0]));
         
-//         System.out.println(stack.get(stack.size() - 1));
-//         System.out.println(stack.remove(stack.size() - 1));
-//         System.out.println(stack.isEmpty());
+        System.out.println(stack.get(stack.size() - 1));
+        System.out.println(stack.remove(stack.size() - 1));
+        System.out.println(stack.isEmpty());
         
         for (int i = 1; i < prices.length; i++) {
             Data data = new Data(i, prices[i]);
@@ -34,7 +34,7 @@ class Solution {
         
         while (!stack.isEmpty()) {
             int temp = stack.remove(stack.size() - 1).index;
-            answer[temp] = prices.length - temp - 1;
+            answer[temp] = prices.length - temp;
         }
         
         return answer;
