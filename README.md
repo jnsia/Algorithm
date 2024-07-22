@@ -1,7 +1,6 @@
-# Java_PGS
+# Algorithm
 
-### Java Spring을 배우기 위한 Java 기초 문법 학습용 repo
-
-![image](https://github.com/JnSia/Java_PGS/assets/108898787/ae41063e-0e6d-45ac-bd50-8b7eded62aa1)
+### 2024.07.22
+여러 레포지토리에 있던 알고리즘 풀이를 하나의 레포지토리에 병합하였음
 
 This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
