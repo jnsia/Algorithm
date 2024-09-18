@@ -1,42 +1,35 @@
+import java.util.*;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
+        StringBuilder sb = new StringBuilder(s);
         
-        s = s.toLowerCase();
-        
-        // 65 ~ 90 => 대문자
-        // 97 ~ 122 => 소문자
-        
-        // for (int i = 0; i < 125; i++) {
-        //     System.out.println((char) i + " " + i); 
-        // }
+        if(s.charAt(0) == ' '){
+            sb.setCharAt(1, Character.toLowerCase(s.charAt(1)));
+        }
 
-        char firstWord = s.charAt(0);
-        
-        if ((int) firstWord >= 97 && (int) firstWord <= 122) {
-            s = (s.charAt(0) + "").toUpperCase() + s.substring(1);
+        // 이거는 첫 글자가 문자일때만 따로 조건문 해놓은거야
+        // 내가 첫번째 글자를 처리하려니 자꾸 index오류 떠서..
+        if(Character.isLetter(s.charAt(0)) && Character.isLowerCase(s.charAt(0))){
+            sb.setCharAt(0, Character.toUpperCase(s.charAt(0)));
         }
         
-        Boolean temp = false;
-        
-        for (int i = 1; i < s.length(); i++) {
-            if (s.charAt(i) == ' ') {
-                temp = true;
-                continue;
-            }
-            
-            if (temp) {
-                if ((int) s.charAt(i) >= 97 && (int) s.charAt(i) <= 122) {
-                    s = s.substring(0, i) + (char) ((int) s.charAt(i) - 32) + s.substring(i + 1);
+        for(int i = 1; i < s.length(); i++){
+            // 문자일때만 대문자, 소문자 검증
+            if(Character.isLetter(s.charAt(i))){
+                if(s.charAt(i - 1) == ' '){
+                    if(Character.isLowerCase(s.charAt(i))){
+                        sb.setCharAt(i, Character.toUpperCase(s.charAt(i)));
+                    }
+                }else{
+                    if(Character.isUpperCase(s.charAt(i))){
+                        sb.setCharAt(i, Character.toLowerCase(s.charAt(i)));
+                    }
                 }
-                
-                temp = false;
             }
         }
-        
-        System.out.println(s);
-        answer = s;
-        
+        answer = sb.toString();
         return answer;
     }
 }
