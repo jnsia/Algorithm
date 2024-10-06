@@ -6,14 +6,16 @@
 
             int N = sc.nextInt();
 
+            Set<String> set = new HashSet<>();
             List<String> arr = new ArrayList<>();
 
             for (int i = 0; i < N; i++) {
                 String input = sc.next();
+                set.add(input);
+            }
 
-                if (arr.contains(input)) continue;
-
-                arr.add(input);
+            for (String string: set) {
+                arr.add(string);
             }
 
             arr.sort(comparator);
