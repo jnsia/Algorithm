@@ -1,35 +1,45 @@
-def find(elem):
-    if parent[elem] == elem:
-        return elem
-
-    parent[elem] = find(parent[elem])
-    return parent[elem]
-
-def union(elem1, elem2):
-    elem1 = find(elem1)
-    elem2 = find(elem2)
-
-    if elem1 > elem2:
-        parent[elem1] = elem2
-    else:
-        parent[elem2] = elem1
-
 import heapq
 
-N, E = map(int, input().split())
+def find(x):
+    if parent[x] == x:
+        return x
+
+    return find(parent[x])
+
+
+def union(x, y):
+    x = find(x)
+    y = find(y)
+
+    if x > y:
+        parent[x] = y
+    else:
+        parent[y] = x
+
+
+V, E = map(int, input().split())
+
+parent = [i for i in range(V + 1)]
 edges = []
-parent = [child for child in range(N + 1)]
-total = 0
 
 for _ in range(E):
-    n1, n2, w = map(int, input().split())
-    heapq.heappush(edges, (w, n1, n2))
+    a, b, c = map(int, input().split())
+    # edges.append((c, a, b))
+    heapq.heappush(edges, (c, a, b))
+
+answer = 0
+connect_count = 0
+edges.sort(key=lambda x: x[0])
 
 while edges:
     weight, start, end = heapq.heappop(edges)
 
-    if find(start) != find(end):
-        total += weight
-        union(start, end)
+    if find(start) == find(end): continue
 
-print(total)
+    union(start, end)
+    answer += weight
+    connect_count += 1
+
+    if connect_count == V - 1: break
+
+print(answer)
